@@ -1,0 +1,2 @@
+class:"nD3D8Server window class"
+name:" Nomads"
