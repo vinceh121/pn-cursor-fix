@@ -17,22 +17,21 @@ int main(void) {
 		return -1;
 	}
 
-	WINDOWINFO wininfo;
-	wininfo.cbSize = sizeof(WINDOWINFO);
-
-	if (!GetWindowInfo(nomads, &wininfo)) {
-		printf("Couldn't get the window's infos\n");
-		return -2;
-	}
-
-	RECT newClip = wininfo.rcClient;
-
-	printf("Nomads window: %d, %d, %d, %d\n", newClip.left, newClip.top, newClip.right, newClip.bottom);
-
 	RECT oldClip;
 	GetClipCursor(&oldClip);
 
+	WINDOWINFO wininfo;
+	wininfo.cbSize = sizeof(WINDOWINFO);
+	RECT newClip;
+
 	while ((nomads = FindWindowW(class, name))) {
+		if (!GetWindowInfo(nomads, &wininfo)) {
+			printf("Couldn't get the window's infos\n");
+			return -2;
+		}
+	
+		newClip = wininfo.rcClient;
+
 		ClipCursor(&newClip);
 		Sleep(500);
 	}
