@@ -5,6 +5,7 @@
 #include <basetsd.h>
 #include <winbase.h>
 #include <winuser.h>
+#include <shellapi.h>
 
 const LPCWSTR class = L"nD3D8Server window class";
 const LPCWSTR name = L" Nomads";
@@ -14,6 +15,16 @@ int main(void) {
 	setvbuf(stdout, NULL, _IONBF, 0);
 
 	HWND nomads = FindWindowW(class, name);
+
+	if (!nomads) {
+		HINSTANCE exeStatus = ShellExecuteW(NULL, NULL, L"nomads.exe", NULL, NULL, 0);
+
+		if (exeStatus < (HINSTANCE)32) {
+			printf("Failed to start nomads.exe: %d\n", exeStatus);
+		} else {
+			printf("Found nomads.exe and started it\n");
+		}
+	}
 
 	for (int i = 10; i > 0 && !nomads; i--) {
 		nomads = FindWindowW(class, name);
