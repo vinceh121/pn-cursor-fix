@@ -7,6 +7,11 @@
 #include <winuser.h>
 #include <shellapi.h>
 
+const char* license = "This program is free software: you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation, either version 3 of the License, or\n"
+"(at your option) any later version.\n\n";
+
 const LPCWSTR class = L"nD3D8Server window class";
 const LPCWSTR name = L" Nomads";
 
@@ -17,6 +22,8 @@ void message(LPCWSTR text, UINT type) {
 int main(void) {
 	// unbuffer stdout
 	setvbuf(stdout, NULL, _IONBF, 0);
+
+	printf(license);
 
 	HWND nomads = FindWindowW(class, name);
 
