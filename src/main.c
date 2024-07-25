@@ -32,7 +32,12 @@ int main(void) {
 	
 		newClip = wininfo.rcClient;
 
-		ClipCursor(&newClip);
+		if (wininfo.dwWindowStatus) {
+			ClipCursor(&newClip);
+		} else {
+			ClipCursor(&oldClip);
+		}
+	
 		Sleep(500);
 	}
 
