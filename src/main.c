@@ -10,6 +10,10 @@
 const LPCWSTR class = L"nD3D8Server window class";
 const LPCWSTR name = L" Nomads";
 
+void message(LPCWSTR text, UINT type) {
+	MessageBoxW(NULL, text, L"Project Nomads Cursor Fix", type);
+}
+
 int main(void) {
 	// unbuffer stdout
 	setvbuf(stdout, NULL, _IONBF, 0);
@@ -34,6 +38,7 @@ int main(void) {
 
 	if (!nomads) {
 		printf("Couldn't find nomads :(\n");
+		message(L"Couldn't find Project Nomads.", MB_ICONERROR);
 		return -1;
 	} else {
 		printf("Found nomads :D\n");
